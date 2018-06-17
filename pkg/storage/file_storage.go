@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"github.com/nerijusza/go-notes/pkg/helper"
-	"github.com/nerijusza/go-notes/pkg/storage"
 )
 
 const fileStorageDir = "/Users/nerijus/go/src/github.com/nerijusza/go-notes/var/storage/file_storage/"
@@ -35,17 +34,17 @@ func (t FileStorage) createFile() error {
 }
 
 // Get gets all notes sorted fron newest to oldest
-func (t *FileStorage) Get() ([]storage.Note, error) {
+func (t *FileStorage) Get() ([]Note, error) {
 	notes, err := t.getNotesFromFile()
 	if err != nil {
 		return nil, err
 	}
 
-	return storage.ReverseNotesArray(notes), nil
+	return reverseNotesArray(notes), nil
 }
 
 // GetN get newest n notes
-func (t *FileStorage) GetN(quantity int) ([]storage.Note, error) {
+func (t *FileStorage) GetN(quantity int) ([]Note, error) {
 	notes, err := t.Get()
 	if err != nil {
 		return nil, err
@@ -70,7 +69,7 @@ func (t *FileStorage) Add(content string) (int, error) {
 		return 0, err
 	}
 
-	notes = append(notes, storage.Note{biggestID + 1, content, helper.GetCurrentTime()})
+	notes = append(notes, Note{biggestID + 1, content, helper.GetCurrentTime()})
 
 	err = t.saveNotesToFile(notes)
 	if err != nil {
@@ -98,20 +97,20 @@ func (t *FileStorage) Delete(ID int) error {
 
 // DeleteAll deletes all notes from storage
 func (t *FileStorage) DeleteAll() error {
-	return t.saveNotesToFile(make([]storage.Note, 0))
+	return t.saveNotesToFile(make([]Note, 0))
 }
 
 func (t FileStorage) getFilePath() string {
 	return fileStorageDir + t.fileName
 }
 
-func (t *FileStorage) getNotesFromFile() ([]storage.Note, error) {
+func (t *FileStorage) getNotesFromFile() ([]Note, error) {
 	fileContent, err := ioutil.ReadFile(t.getFilePath())
 	if err != nil {
 		return nil, err
 	}
 
-	notes := make([]storage.Note, 0)
+	notes := make([]Note, 0)
 	if len(fileContent) > 0 {
 		err = json.Unmarshal(fileContent, &notes)
 	}
@@ -119,7 +118,7 @@ func (t *FileStorage) getNotesFromFile() ([]storage.Note, error) {
 	return notes, err
 }
 
-func (t *FileStorage) saveNotesToFile(notes []storage.Note) error {
+func (t *FileStorage) saveNotesToFile(notes []Note) error {
 	fileContent, err := json.Marshal(notes)
 	if err != nil {
 		return err

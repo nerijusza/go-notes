@@ -9,13 +9,12 @@ type Note struct {
 
 // Storager for storing notes
 type Storager interface {
-	Getter
-	Adder
-	Deleter
+	getter
+	adder
+	deleter
 }
 
-// Getter to get notes from storage
-type Getter interface {
+type getter interface {
 	// Get all notes sorted from newest to oldest
 	Get() ([]Note, error)
 
@@ -23,14 +22,12 @@ type Getter interface {
 	GetN(int) ([]Note, error)
 }
 
-// Adder for adding notes to storage
-type Adder interface {
+type adder interface {
 	// Add new note
 	Add(string) (int, error)
 }
 
-// Deleter to delete notes from storage
-type Deleter interface {
+type deleter interface {
 	// Delete given note
 	Delete(int) error
 

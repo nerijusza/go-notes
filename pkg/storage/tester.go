@@ -11,6 +11,7 @@ type Tester struct {
 	T       *testing.T
 }
 
+// Test tests given storage implementation
 func (s *Tester) Test() {
 	s.testDeleteAll()
 

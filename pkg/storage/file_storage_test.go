@@ -2,8 +2,6 @@ package storage
 
 import (
 	"testing"
-
-	"github.com/nerijusza/go-notes/pkg/storage"
 )
 
 func TestFileStorage(t *testing.T) {
@@ -15,7 +13,7 @@ func TestFileStorage(t *testing.T) {
 	}
 
 	// pass to dedicated memory tester, to test against storager interface
-	tester := storage.Tester{&s, t}
+	tester := Tester{&s, t}
 	tester.Test()
 }
 
@@ -27,7 +25,7 @@ func TestGetBiggestNoteID(t *testing.T) {
 	if err != nil {
 		t.Fatal("First Get failed: " + err.Error())
 	}
-	return
+
 	err = s.DeleteAll()
 	if err != nil {
 		t.Fatal("DeleteAll failed: " + err.Error())

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Go notes</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="jumbotron text-center">
+        <h1>Go Notes
+            <small>by Nerijus</small>
+        </h1>
+    </div>
+
+    <div class="container">
+
+        {{if .Error}}
+        <div class="row">
+            <div class="col-sm-12 alert alert-danger">
+                {{.Error}}
+            </div>
+        </div>
+        {{end}}
+
+        {{if .Message}}
+        <div class="row">
+            <div class="col-sm-12 alert alert-success">
+                {{.Message}}
+            </div>
+        </div>
+        {{end}}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="/add" method="POST">
+                    <div class="form-group">
+                        <label>New note:</label>
+                        <textarea class="form-control" rows="2" name="note_content"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Post new note</button>
+                </form>
+            </div>
+        </div>
+
+        {{range $k, $groupedNotes := $.Notes}} 
+        <div class="row">
+                {{range $k, $note := $groupedNotes}} 
+                <div class="col-sm-3">
+                        <p>{{$note.Content}}
+                            <br>
+                            <span class="text-muted small">{{$note.DateCreated}}</span>
+                            <a href="/delete/{{$note.ID}}"><span class="glyphicon glyphicon-remove" role="button"></span></a>
+                        </p>
+                    </div>
+                {{end}}
+        </div>
+        {{end}}
+    </div>
+</body>
+</html>

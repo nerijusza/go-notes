@@ -13,8 +13,6 @@ type Factory struct {
 
 // Get returns storage implementation
 func (t *Factory) Get() (Storager, error) {
-	//return nil, errors.New("some error storage init failed")
-
 	err := t.initialize()
 	if err != nil {
 		return nil, err

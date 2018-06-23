@@ -20,7 +20,7 @@ type FileStorageConfig struct {
 
 // GetSetup reads config to variable and returns it
 func GetSetup() Setup {
-	config.Load(file.NewSource(file.WithPath("../../config.yaml")))
+	config.Load(file.NewSource(file.WithPath("config.yaml")))
 	c := Setup{}
 	config.Scan(&c)
 	return c

@@ -33,7 +33,7 @@ func (t *Render) Process(data Data) (string, error) {
 	}
 
 	tmpl := template.New("index.htm")
-	tmpl, err := tmpl.ParseFiles("../../public/index.htm")
+	tmpl, err := tmpl.ParseFiles("public/index.htm")
 
 	renderedOutput := &bytes.Buffer{}
 	err = tmpl.ExecuteTemplate(renderedOutput, "index.htm", preparedData)

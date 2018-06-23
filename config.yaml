@@ -1,0 +1,4 @@
+storageType: file
+storageTypeFile:
+  directory: /Users/nerijus/go/src/github.com/nerijusza/go-notes/var/storage/file_storage/
+  file: website_data.txt

@@ -46,8 +46,8 @@ func (t *Factory) initializeMemoryStorage() error {
 }
 
 func (t *Factory) initializeFileStorage(setup config.FileStorageConfig) error {
-	s := FileStorage{setup.Directory + "/" + setup.File}
-	err := s.Init(setup.File)
+	s := FileStorage{setup.ProductionFile}
+	err := s.Init()
 	if err == nil {
 		t.storage = &s
 	}

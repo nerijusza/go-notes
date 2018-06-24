@@ -14,13 +14,14 @@ type Setup struct {
 
 // FileStorageConfig file storage setup
 type FileStorageConfig struct {
-	Directory string
-	File      string
+	ProductionFile string
+	TestFile       string
 }
 
 // GetSetup reads config to variable and returns it
 func GetSetup() Setup {
-	config.Load(file.NewSource(file.WithPath("config.yaml")))
+	config.Load(file.NewSource(file.WithPath("config.yaml")))       // for main
+	config.Load(file.NewSource(file.WithPath("../../config.yaml"))) // for tests
 	c := Setup{}
 	config.Scan(&c)
 	return c

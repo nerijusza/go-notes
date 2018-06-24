@@ -8,27 +8,23 @@ import (
 	"github.com/nerijusza/go-notes/pkg/helper"
 )
 
-const fileStorageDir = "/Users/nerijus/go/src/github.com/nerijusza/go-notes/var/storage/file_storage/"
-
 // FileStorage implementation of StorageInterface in file system
 type FileStorage struct {
 	fileName string // file name to work with, just name not absolute or partial paths
 }
 
 // Init initializes storage aka constructor
-func (t *FileStorage) Init(fileName string) error {
-	t.fileName = fileName
+func (t *FileStorage) Init() error {
 	return t.createFile()
-	//return nil
 }
 
 func (t FileStorage) createFile() error {
 	// detect if file exists
-	var _, err = os.Stat(t.getFilePath())
+	var _, err = os.Stat(t.fileName)
 
 	// create file if not exists
 	if os.IsNotExist(err) {
-		_, err = os.Create(t.getFilePath())
+		_, err = os.Create(t.fileName)
 	}
 	return err
 }
@@ -100,12 +96,8 @@ func (t *FileStorage) DeleteAll() error {
 	return t.saveNotesToFile(make([]Note, 0))
 }
 
-func (t FileStorage) getFilePath() string {
-	return fileStorageDir + t.fileName
-}
-
 func (t *FileStorage) getNotesFromFile() ([]Note, error) {
-	fileContent, err := ioutil.ReadFile(t.getFilePath())
+	fileContent, err := ioutil.ReadFile(t.fileName)
 	if err != nil {
 		return nil, err
 	}
@@ -124,7 +116,7 @@ func (t *FileStorage) saveNotesToFile(notes []Note) error {
 		return err
 	}
 
-	err = ioutil.WriteFile(t.getFilePath(), fileContent, 0644)
+	err = ioutil.WriteFile(t.fileName, fileContent, 0644)
 	if err != nil {
 		return err
 	}

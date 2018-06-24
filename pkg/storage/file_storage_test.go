@@ -1,13 +1,17 @@
 package storage
 
 import (
+	"fmt"
+
+	"github.com/nerijusza/go-notes/pkg/config"
+
 	"testing"
 )
 
 func TestFileStorage(t *testing.T) {
-	// inittialize memory storage
-	s := FileStorage{}
-	err := s.Init("unit_test_interface_tester.txt")
+	setup := config.GetSetup()
+	s := FileStorage{setup.StorageTypeFile.TestFile}
+	err := s.Init()
 	if err != nil {
 		t.Fatal("Object initializiation failed: " + err.Error())
 	}
@@ -18,8 +22,10 @@ func TestFileStorage(t *testing.T) {
 }
 
 func TestGetBiggestNoteID(t *testing.T) {
-	s := FileStorage{}
-	s.Init("unit_test_TestGetBiggestNoteID.json")
+	setup := config.GetSetup()
+	fmt.Println(setup)
+	s := FileStorage{setup.StorageTypeFile.TestFile}
+	s.Init()
 
 	_, err := s.Get()
 	if err != nil {

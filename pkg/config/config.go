@@ -7,15 +7,29 @@ import (
 
 // Setup main config
 type Setup struct {
-	//Possible values: file, memory
-	StorageType     string
-	StorageTypeFile FileStorageConfig
+	//Possible values: file, memory, airtable
+	StorageType         string
+	StorageTypeFile     FileStorageConfig
+	StorageTypeAirTable AirTableConfig
 }
 
 // FileStorageConfig file storage setup
 type FileStorageConfig struct {
 	ProductionFile string
 	TestFile       string
+}
+
+// AirTableConfig configturation for "Air Table" usage as storage engine
+type AirTableConfig struct {
+	Production AirTableEnvironment
+	Test       AirTableEnvironment
+}
+
+// AirTableEnvironment setup for one environment
+type AirTableEnvironment struct {
+	Account   string
+	APIKey    string
+	TableName string
 }
 
 // GetSetup reads config to variable and returns it

@@ -33,6 +33,10 @@ func (t *Factory) initialize() error {
 	if setup.StorageType == "memory" {
 		return t.initializeMemoryStorage()
 	}
+	if setup.StorageType == "airtable" {
+		t.initializeAirTableStorage(setup.StorageTypeAirTable.Production)
+		return nil
+	}
 
 	return errors.New("Unknown memory storage type: " + setup.StorageType)
 }
@@ -52,4 +56,9 @@ func (t *Factory) initializeFileStorage(setup config.FileStorageConfig) error {
 		t.storage = &s
 	}
 	return err
+}
+
+func (t *Factory) initializeAirTableStorage(setup config.AirTableEnvironment) {
+	s := AirTableStorage{setup.Account, setup.APIKey, setup.TableName}
+	t.storage = &s
 }

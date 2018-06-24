@@ -1,4 +1,13 @@
-storageType: file
+storageType: airtable
 storageTypeFile:
   productionFile: /Users/nerijus/go/src/github.com/nerijusza/go-notes/var/storage/file_storage/website_data.txt
   testFile: /Users/nerijus/go/src/github.com/nerijusza/go-notes/var/storage/file_storage/test_data.txt
+StorageTypeAirTable:
+  Production:
+    Account: appKzQzCIo0KaXEco
+    APIKey: keyE4X4zKRLfTq84w
+    TableName: prod_notes
+  Test:
+    Account: appKzQzCIo0KaXEco
+    APIKey: keyE4X4zKRLfTq84w
+    TableName: test_notes

@@ -1,8 +1,6 @@
 package storage
 
 import (
-	"fmt"
-
 	"github.com/nerijusza/go-notes/pkg/config"
 
 	"testing"
@@ -23,7 +21,6 @@ func TestFileStorage(t *testing.T) {
 
 func TestGetBiggestNoteID(t *testing.T) {
 	setup := config.GetSetup()
-	fmt.Println(setup)
 	s := FileStorage{setup.StorageTypeFile.TestFile}
 	s.Init()
 

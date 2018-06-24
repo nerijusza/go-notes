@@ -1,3 +1,4 @@
+# possible values: memory, file, airtable
 storageType: airtable
 storageTypeFile:
   productionFile: /Users/nerijus/go/src/github.com/nerijusza/go-notes/var/storage/file_storage/website_data.txt
